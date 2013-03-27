@@ -6,6 +6,8 @@ This Server is simple RPG server, use C write, run in Linux.
 C实现的RPG游戏服务端模型。 
 项目原名AS3Chat，托管地址：http://code.google.com/p/as3chat
 
+Demo：http://myleft.org 点击“登录”即可。
+
 it's more than just a chat room, chat room is only one of its applications. 
 it can achieve many functions via socket communication. 
 This is what i am trying to implement,which is simple but useful.
