@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="88">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <logicalFolder name="HeaderFiles" displayName="头文件" projectFiles="true">
+      <itemPath>MyleftServer.h</itemPath>
+      <itemPath>authreg.h</itemPath>
+      <itemPath>db_mysql.h</itemPath>
+      <itemPath>ezxml.h</itemPath>
+      <itemPath>global.h</itemPath>
+      <itemPath>hash.h</itemPath>
+      <itemPath>log.h</itemPath>
+      <itemPath>luafunction.h</itemPath>
+    </logicalFolder>
+    <logicalFolder name="SourceFiles" displayName="源文件" projectFiles="true">
+      <itemPath>MyleftServer.c</itemPath>
+      <itemPath>authreg.c</itemPath>
+      <itemPath>db_mysql.c</itemPath>
+      <itemPath>ezxml.c</itemPath>
+      <itemPath>function.c</itemPath>
+      <itemPath>hash.c</itemPath>
+      <itemPath>log.c</itemPath>
+      <itemPath>luafunction.c</itemPath>
+      <itemPath>message.c</itemPath>
+    </logicalFolder>
+    <logicalFolder name="ResourceFiles" displayName="资源文件" projectFiles="true">
+      <logicalFolder name="conf" displayName="conf" projectFiles="true">
+        <itemPath>conf/account.lua</itemPath>
+        <itemPath>conf/config.lua</itemPath>
+        <itemPath>conf/crossdomain.xml</itemPath>
+        <itemPath>conf/database.lua</itemPath>
+        <itemPath>conf/parsemessage.lua</itemPath>
+        <itemPath>conf/room.lua</itemPath>
+        <itemPath>conf/room.lua.bak</itemPath>
+        <itemPath>conf/user.lua</itemPath>
+      </logicalFolder>
+      <logicalFolder name="libs" displayName="libs" projectFiles="true">
+      </logicalFolder>
+    </logicalFolder>
+    <logicalFolder name="TestFiles"
+                   displayName="测试文件"
+                   projectFiles="false"
+                   kind="TEST_LOGICAL_FOLDER">
+    </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="重要文件"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>Makefile</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <sourceRootList>
+    <Elem>libs</Elem>
+    <Elem>conf</Elem>
+  </sourceRootList>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Debug" type="1">
+      <toolsSet>
+        <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
+        <compilerSet>GNU|GNU</compilerSet>
+      </toolsSet>
+      <compileType>
+        <linkerTool>
+          <linkerLibItems>
+            <linkerLibStdlibItem>Mathematics</linkerLibStdlibItem>
+            <linkerLibStdlibItem>PosixThreads</linkerLibStdlibItem>
+            <linkerLibLibItem>mysqlclient</linkerLibLibItem>
+            <linkerLibLibItem>ssl</linkerLibLibItem>
+          </linkerLibItems>
+        </linkerTool>
+      </compileType>
+      <item path="MyleftServer.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="MyleftServer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="authreg.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="authreg.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="conf/account.lua" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="conf/config.lua" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="conf/crossdomain.xml" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="conf/database.lua" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="conf/parsemessage.lua" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="conf/room.lua" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="conf/room.lua.bak" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="conf/user.lua" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="db_mysql.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="db_mysql.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ezxml.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="ezxml.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="function.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="global.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="hash.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="hash.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="log.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="log.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="luafunction.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="luafunction.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="message.c" ex="false" tool="0" flavor2="0">
+      </item>
+    </conf>
+    <conf name="Release" type="1">
+      <toolsSet>
+        <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
+        <compilerSet>GNU|GNU</compilerSet>
+      </toolsSet>
+      <compileType>
+        <cTool>
+          <developmentMode>5</developmentMode>
+          <incDir>
+            <pElem>.</pElem>
+            <pElem>/usr/include/lua5.2</pElem>
+          </incDir>
+        </cTool>
+        <ccTool>
+          <developmentMode>5</developmentMode>
+        </ccTool>
+        <fortranCompilerTool>
+          <developmentMode>5</developmentMode>
+        </fortranCompilerTool>
+        <asmTool>
+          <developmentMode>5</developmentMode>
+        </asmTool>
+        <linkerTool>
+          <linkerLibItems>
+            <linkerLibStdlibItem>Mathematics</linkerLibStdlibItem>
+            <linkerLibStdlibItem>PosixThreads</linkerLibStdlibItem>
+            <linkerLibLibItem>mysqlclient</linkerLibLibItem>
+            <linkerLibLibItem>crypt</linkerLibLibItem>
+            <linkerLibLibItem>crypto</linkerLibLibItem>
+            <linkerLibLibItem>lua5.2</linkerLibLibItem>
+            <linkerLibLibItem>z</linkerLibLibItem>
+          </linkerLibItems>
+        </linkerTool>
+      </compileType>
+      <item path="MyleftServer.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="MyleftServer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="authreg.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="authreg.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="conf/account.lua" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="conf/config.lua" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="conf/crossdomain.xml" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="conf/database.lua" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="conf/parsemessage.lua" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="conf/room.lua" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="conf/room.lua.bak" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="conf/user.lua" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="db_mysql.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="db_mysql.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ezxml.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="ezxml.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="function.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="global.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="hash.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="hash.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="log.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="log.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="luafunction.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="luafunction.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="message.c" ex="false" tool="0" flavor2="0">
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>

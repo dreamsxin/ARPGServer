@@ -1,0 +1,10 @@
+dbtype = "mysql"
+dbhost = "localhost"
+dbport = 3306
+dbuser = "root"
+dbpass = "123456"
+dbname = "ultrax"
+dbtable = "pre_ucenter_members"
+fieldusername = "username"
+fieldpassword = "password"
+fieldsalt = "salt"
