@@ -21,3 +21,6 @@ email:dreamsxin@qq.com
 服务端可以运行在Linux内核2.6以上版本(epoll)。
 
 集成Lua5.2
+
+QQ:176013762
+Email:dreamsxin@qq.com
