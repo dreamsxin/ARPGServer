@@ -28,6 +28,7 @@ int lua_send_message_all(lua_State *L);
 
 void lua_load_config();
 void lua_load_room();
+char *lua_getcrossdomain();
 char *lua_getaccountkey(char *account);
 int lua_getuserrole(const char *username);
 int lua_getuserpasswd(const char *username, char *password, char *salt);

@@ -175,7 +175,7 @@ void *serv_heartbeat(void *args) {
             }
             if ((mytimestamp - fd_clients[i]->keepalivetime) > 120) {
 
-                log_write(LOG_DEBUG, "60秒内没有活动自动退出！, %s, %d", __FILE__, __LINE__);
+                log_write(LOG_DEBUG, "serv_heartbeat 60秒内没有活动自动退出！, %s, %d", __FILE__, __LINE__);
                 node_del(fd_clients[i], i);
             }
         }
@@ -205,7 +205,7 @@ void *serv_policy(void *args) {
     listen_addr.sin_addr.s_addr = htonl(INADDR_ANY); //inet_addr("127.0.0.1");
 
     if (bind(listenfd, (struct sockaddr*) & listen_addr, sizeof (listen_addr)) < 0) {
-        log_write(LOG_DEBUG, "bind error:%s, file:%s, line:%d\n", strerror(errno), __FILE__, __LINE__);
+        log_write(LOG_DEBUG, "serv_policy bind error:%s, file:%s, line:%d\n", strerror(errno), __FILE__, __LINE__);
         goto end;
     }
 
@@ -214,10 +214,10 @@ void *serv_policy(void *args) {
         goto end;
     }
 
-    log_write(LOG_DEBUG, "serv_policy监听端口:%d......, %s, %d", policy_port, __FILE__, __LINE__);
+    log_write(LOG_DEBUG, "serv_policy 监听端口:%d......, %s, %d", policy_port, __FILE__, __LINE__);
     /* 设置socket为非阻塞模式，使用libevent编程这是必不可少的。 */
     if (evutil_make_socket_nonblocking(listenfd) < 0) {
-        log_write(LOG_ERR, "evutil_make_socket_nonblocking error, %s, %d", __FILE__, __LINE__);
+        log_write(LOG_ERR, "serv_policy evutil_make_socket_nonblocking error, %s, %d", __FILE__, __LINE__);
         goto end;
     }
 
@@ -230,7 +230,7 @@ void *serv_policy(void *args) {
     ev.events = EPOLLIN | EPOLLET;
 
     if ((epoll_ctl(policy_epfd, EPOLL_CTL_ADD, listenfd, &ev)) < 0) {
-        log_write(LOG_ERR, "epoll_ctl error, %s, %d", __FILE__, __LINE__);
+        log_write(LOG_ERR, "serv_policy epoll_ctl error, %s, %d", __FILE__, __LINE__);
         close(listenfd);
         goto end;
     }
@@ -245,6 +245,8 @@ void *serv_policy(void *args) {
     int recv_bits, ret;
     FILE *fp;
     char buf[MAX_BUFFER_LENGTH];
+    char crossdomain[MAX_BUFFER_LENGTH];
+	memset(crossdomain, '\0', sizeof (crossdomain));
     while (1) {
         nfds = epoll_wait(policy_epfd, events, MAX_EVENTS, -1);
 
@@ -256,12 +258,12 @@ void *serv_policy(void *args) {
                     continue;
                 }
 
-                log_write(LOG_DEBUG, "new Connection %d, %s, %d", client_fd, __FILE__, __LINE__);
+                log_write(LOG_DEBUG, "serv_policy new Connection %d, %s, %d", client_fd, __FILE__, __LINE__);
                 keepalive(client_fd); //设置心跳
                 ev.data.fd = client_fd;
                 ev.events = EPOLLIN | EPOLLET;
                 if ((epoll_ctl(policy_epfd, EPOLL_CTL_ADD, client_fd, &ev)) < 0) {
-                    log_write(LOG_ERR, "connect failed, %s, %d", client_fd, __FILE__, __LINE__);
+                    log_write(LOG_ERR, "serv_policy connect failed, %s, %d", client_fd, __FILE__, __LINE__);
                 }
             } else if (events[i].events & EPOLLIN) {
                 if (event_fd < 0) {
@@ -283,17 +285,13 @@ void *serv_policy(void *args) {
                     continue;
                 }
             } else if (events[i].events & EPOLLOUT) {
-                fp = fopen("./conf/crossdomain.xml", "rb");
-                if (fp != NULL) {
-                    while (!feof(fp)) {
-
-                        memset(buf, '\0', sizeof (buf));
-                        recv_bits = fread(buf, 1, sizeof (buf), fp);
-                        //ret = write(event_fd, buf, recv_bits + 1); //+1是为了，末尾发个\0，flashplayer才会接受
-                        ret = send(event_fd, buf, recv_bits + 1, MSG_NOSIGNAL);
-                        log_write(LOG_DEBUG, "ret:%d, buf:%s, %s, %d", ret, buf, __FILE__, __LINE__);
-                    }
-                }
+				if (strlen(crossdomain) <= 0) {
+					char *temp = lua_getcrossdomain();
+					memcpy(crossdomain, temp, (strlen(temp)+1));
+				}
+				
+				ret = send(event_fd, crossdomain, strlen(crossdomain)+1, MSG_NOSIGNAL);
+                log_write(LOG_DEBUG, "serv_policy ret:%d, crossdomain:%s, %s, %d", ret, crossdomain, __FILE__, __LINE__);
 
                 ev.data.fd = event_fd;
                 ev.events = EPOLLIN | EPOLLET;
@@ -325,7 +323,7 @@ void *serv_epoll(void *args) {
         for (i = 0; i < nfds; ++i) {
             time(&mytimestamp);
             p = gmtime(&mytimestamp);
-            log_write(LOG_DEBUG, "fd:%d, file:%s, line:%d\n", events[i].data.fd, __FILE__, __LINE__);
+            log_write(LOG_DEBUG, "serv_epoll fd:%d, file:%s, line:%d\n", events[i].data.fd, __FILE__, __LINE__);
 
             event_fd = events[i].data.fd;
             if (events[i].events & EPOLLIN) {
@@ -348,20 +346,20 @@ read:
                 data_bits = 0;
                 recv_bits = read(event_fd, &len, sizeof (len));
 
-                log_write(LOG_DEBUG, "recv_bits:%d, readnum:%d, len:%d, file:%s, line:%d\n", recv_bits, readnum, len, __FILE__, __LINE__);
+                log_write(LOG_DEBUG, "serv_epoll recv_bits:%d, readnum:%d, len:%d, file:%s, line:%d\n", recv_bits, readnum, len, __FILE__, __LINE__);
 
                 if (recv_bits <= 0 && readnum > 0) {
                     continue;
                 } else if (recv_bits == sizeof (len)) {
 					len = ntohl(len);
-					log_write(LOG_DEBUG, "len:%d, file:%s, line:%d\n", len, __FILE__, __LINE__);
+					log_write(LOG_DEBUG, "serv_epoll len:%d, file:%s, line:%d\n", len, __FILE__, __LINE__);
                     
                     if (len <= sizeof (buf)) {
                         data_bits = read(event_fd, buf, len);
                     } else {
                         recv_bits = 0; //关闭连接
                     }
-                    log_write(LOG_DEBUG, "data_bits:%d, buf:%s, file:%s, line:%d\n", data_bits, buf, __FILE__, __LINE__);
+                    log_write(LOG_DEBUG, "serv_epoll data_bits:%d, buf:%s, file:%s, line:%d\n", data_bits, buf, __FILE__, __LINE__);
                 }
 
                 if (recv_bits > 0 && data_bits <= 0) {//数据已读完
@@ -384,7 +382,7 @@ read:
                         memcpy(new_task->data, &buf, data_bits);
                     }
                     new_task->next = NULL;
-                    log_write(LOG_DEBUG, "new_task, file:%s, line:%d\n", __FILE__, __LINE__);
+                    log_write(LOG_DEBUG, "serv_epoll new_task, file:%s, line:%d\n", __FILE__, __LINE__);
                     pthread_mutex_lock(&t_mutex);
                     if (task_head == NULL) {
                         task_head = new_task;
@@ -393,7 +391,7 @@ read:
                     }
                     task_last = new_task;
                     //唤醒其中一个线程即可
-                    log_write(LOG_DEBUG, "唤醒所有等待cond1条件的线程, %s, %d", __FILE__, __LINE__);
+                    log_write(LOG_DEBUG, "serv_epoll 唤醒所有等待cond1条件的线程, %s, %d", __FILE__, __LINE__);
                     pthread_cond_signal(&t_cond);
 
                     //唤醒所有等待cond1条件的线程
@@ -421,22 +419,18 @@ read:
                 //perror("other event");
             }
 
-            log_write(LOG_DEBUG, "小循环结束, %s, %d", __FILE__, __LINE__);
+            log_write(LOG_DEBUG, "serv_epoll 小循环结束, %s, %d", __FILE__, __LINE__);
         }
         pthread_testcancel();
-        /* 查看内存泄漏 */
-        //show_memory();
-        //show_memory_summary();
     }
     pthread_exit(NULL);
 }
 
 //注销程序
-
 void destory() {
     log_write(LOG_DEBUG, "destory, %s, %d", __FILE__, __LINE__);
     authreg_free();
-    log_write(LOG_DEBUG, "authreg_free, %s, %d", __FILE__, __LINE__);
+    log_write(LOG_DEBUG, "destory authreg_free, %s, %d", __FILE__, __LINE__);
 
     int i;
     if (t_epoll) pthread_cancel(t_epoll);
@@ -444,14 +438,14 @@ void destory() {
     for (t_num; t_num > 0; t_num--) {
         if (tid[t_num]) pthread_cancel(tid[t_num]);
     }
-    log_write(LOG_DEBUG, "开始释放client, %s, %d", __FILE__, __LINE__);
+    log_write(LOG_DEBUG, "destory 开始释放client, %s, %d", __FILE__, __LINE__);
     for (i = 0; i < MAX_FDS; i++) {
         if (fd_clients[i] != NULL) {
             node_del(fd_clients[i], i);
         }
         pthread_mutex_destroy(&t_mutex_fd[i]);
     }
-    log_write(LOG_DEBUG, "MAX_ROOMS, %s, %d", __FILE__, __LINE__);
+    log_write(LOG_DEBUG, "destory MAX_ROOMS, %s, %d", __FILE__, __LINE__);
     for (i = 0; i < MAX_ROOMS; i++) {
         if (rooms[i].name != NULL) {
             free(rooms[i].name);

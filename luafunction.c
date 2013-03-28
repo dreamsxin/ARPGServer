@@ -140,6 +140,21 @@ void lua_load_config() {
     lua_close(L);
 }
 
+char *lua_getcrossdomain() {
+    lua_State *L = lua_init();
+    /* 运行脚本 */
+    int err = luaL_dofile(L, "conf/config.lua");
+    if (err) {
+        //如果错误，显示
+        log_write(LOG_ERR, lua_tostring(L, -1), __FILE__, __LINE__);
+        return NULL;
+    }
+
+    char *crossdomain = lua_getstring(L, "crossdomain");
+    lua_close(L);
+    return crossdomain;
+}
+
 char *lua_getaccountkey(char *account) {
     lua_State *L = lua_init();
     /* 运行脚本 */

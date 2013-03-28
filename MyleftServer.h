@@ -79,8 +79,8 @@ extern "C" {
 	int t_min;
 	int port;
 	int epfd; //epoll句柄
-
 	int t_num; //线程数
+	
 	pthread_t tid[T_MAX];
 	pthread_mutex_t t_mutex;
 	pthread_cond_t t_cond;

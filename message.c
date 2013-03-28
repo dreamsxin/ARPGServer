@@ -153,8 +153,8 @@ void parse_message(struct task * args) {
             log_write(LOG_DEBUG, "验证串验证, %s, %d", __FILE__, __LINE__);
             fdnode->anonymous = 0;
             if (account && strncmp("myleft", account, sizeof (account)) != 0) {
-                strncpy(fdnode->username, account, MAX_CHAR_LENGTH);
-                strncat(fdnode->username, username, MAX_CHAR_LENGTH);
+                strncpy(fdnode->username, account, 32);
+                strncat(fdnode->username, username, 32);
             } else {
                 strncpy(fdnode->username, username, MAX_CHAR_LENGTH);
             }
