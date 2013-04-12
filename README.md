@@ -30,3 +30,21 @@ https://github.com/dreamsxin/CKohana
 
 QQ:176013762
 Email:dreamsxin@qq.com
+
+Installer
+---------
+
+#### Requirements
+We need some packages previously installed.
+
+* SSL development resources
+* MySQLClient development resources
+* Zlib development resources
+* Lua5.2 development resources
+* GCC compiler
+
+Ubuntu:
+
+```bash
+sudo apt-get install libssl-dev libmysqlclient-dev zlib1g-dev liblua5.2-dev
+```
