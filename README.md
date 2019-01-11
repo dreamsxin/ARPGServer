@@ -3,10 +3,12 @@ ARPGServer
 
 This Server is simple RPG server, use C write, run in Linux.
 
-C实现的RPG游戏服务端模型。 
-项目原名AS3Chat，托管地址：http://code.google.com/p/as3chat
+- Client
 
-Demo：http://myleft.org 点击“登录”即可。
+https://github.com/dreamsxin/ARPGClient
+
+C 实现的RPG游戏服务端模型。 
+项目原名AS3Chat，托管地址：http://code.google.com/p/as3chat
 
 it's more than just a chat room, chat room is only one of its applications. 
 it can achieve many functions via socket communication. 
@@ -22,12 +24,11 @@ email:dreamsxin@qq.com
 功能其实很简单，希望能通过简单的功能做出好用的东西，因为做的比较匆忙，有些BUG、功能也没有时间去修复和完善，如果可以的话，可以大家一起来完善，成为一个真正可以拿来用的项目。
 服务端可以运行在Linux内核2.6以上版本(epoll)。
 
-集成Lua5.2
+- 集成 Lua5.2
 
-其它项目
+* 其它项目
 
-https://github.com/dreamsxin/ARPGClient
-
+https://github.com/dreamsxin/cphalcon7
 https://github.com/dreamsxin/CKohana
 
 QQ:176013762
@@ -49,4 +50,5 @@ Ubuntu:
 
 ```bash
 sudo apt-get install libssl-dev libmysqlclient-dev zlib1g-dev liblua5.2-dev
+make CONF=Debug
 ```
