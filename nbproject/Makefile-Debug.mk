@@ -57,7 +57,7 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=-lm -lpthread -lmysqlclient -lssl
+LDLIBSOPTIONS=-lcrypt -lz -lm -lpthread -lmysqlclient -lssl -llua5.2
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}

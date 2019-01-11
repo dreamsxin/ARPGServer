@@ -21,7 +21,7 @@ FC=gfortran
 AS=as
 
 # Macros
-CND_PLATFORM=GNU-Linux-x86
+CND_PLATFORM=GNU-Linux
 CND_DLIB_EXT=so
 CND_CONF=Release
 CND_DISTDIR=dist
@@ -64,56 +64,56 @@ LDLIBSOPTIONS=-lm -lpthread -lmysqlclient -lcrypt -lcrypto -llua5.2 -lz
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
-	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/myleftserver
+	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/arpgserver
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/myleftserver: ${OBJECTFILES}
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/arpgserver: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
-	${LINK.c} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/myleftserver ${OBJECTFILES} ${LDLIBSOPTIONS}
+	${LINK.c} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/arpgserver ${OBJECTFILES} ${LDLIBSOPTIONS}
 
 ${OBJECTDIR}/MyleftServer.o: MyleftServer.c 
 	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.c) -O2 -I. -I/usr/include/lua5.2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/MyleftServer.o MyleftServer.c
+	${RM} "$@.d"
+	$(COMPILE.c) -O2 -I. -I/usr/include/lua5.2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/MyleftServer.o MyleftServer.c
 
 ${OBJECTDIR}/authreg.o: authreg.c 
 	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.c) -O2 -I. -I/usr/include/lua5.2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/authreg.o authreg.c
+	${RM} "$@.d"
+	$(COMPILE.c) -O2 -I. -I/usr/include/lua5.2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/authreg.o authreg.c
 
 ${OBJECTDIR}/db_mysql.o: db_mysql.c 
 	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.c) -O2 -I. -I/usr/include/lua5.2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/db_mysql.o db_mysql.c
+	${RM} "$@.d"
+	$(COMPILE.c) -O2 -I. -I/usr/include/lua5.2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/db_mysql.o db_mysql.c
 
 ${OBJECTDIR}/ezxml.o: ezxml.c 
 	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.c) -O2 -I. -I/usr/include/lua5.2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/ezxml.o ezxml.c
+	${RM} "$@.d"
+	$(COMPILE.c) -O2 -I. -I/usr/include/lua5.2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ezxml.o ezxml.c
 
 ${OBJECTDIR}/function.o: function.c 
 	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.c) -O2 -I. -I/usr/include/lua5.2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/function.o function.c
+	${RM} "$@.d"
+	$(COMPILE.c) -O2 -I. -I/usr/include/lua5.2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/function.o function.c
 
 ${OBJECTDIR}/hash.o: hash.c 
 	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.c) -O2 -I. -I/usr/include/lua5.2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/hash.o hash.c
+	${RM} "$@.d"
+	$(COMPILE.c) -O2 -I. -I/usr/include/lua5.2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/hash.o hash.c
 
 ${OBJECTDIR}/log.o: log.c 
 	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.c) -O2 -I. -I/usr/include/lua5.2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/log.o log.c
+	${RM} "$@.d"
+	$(COMPILE.c) -O2 -I. -I/usr/include/lua5.2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/log.o log.c
 
 ${OBJECTDIR}/luafunction.o: luafunction.c 
 	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.c) -O2 -I. -I/usr/include/lua5.2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/luafunction.o luafunction.c
+	${RM} "$@.d"
+	$(COMPILE.c) -O2 -I. -I/usr/include/lua5.2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/luafunction.o luafunction.c
 
 ${OBJECTDIR}/message.o: message.c 
 	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.c) -O2 -I. -I/usr/include/lua5.2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/message.o message.c
+	${RM} "$@.d"
+	$(COMPILE.c) -O2 -I. -I/usr/include/lua5.2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/message.o message.c
 
 # Subprojects
 .build-subprojects:
@@ -121,7 +121,7 @@ ${OBJECTDIR}/message.o: message.c
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}
 	${RM} -r ${CND_BUILDDIR}/${CND_CONF}
-	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/myleftserver
+	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/arpgserver
 
 # Subprojects
 .clean-subprojects:

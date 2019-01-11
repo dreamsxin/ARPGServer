@@ -30,9 +30,6 @@
 #include <stdarg.h>
 #include <fcntl.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 #define EZXML_BUFSIZE 1024 // size of internal memory buffers
 #define EZXML_NAMEM   0x80 // name is malloced
@@ -160,8 +157,5 @@ ezxml_t ezxml_insert(ezxml_t xml, ezxml_t dest, size_t off);
 // removes a tag along with all its subtags
 #define ezxml_remove(xml) ezxml_free(ezxml_cut(xml))
 
-#ifdef __cplusplus
-}
-#endif
 
 #endif // _EZXML_H
